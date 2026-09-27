@@ -5,10 +5,10 @@
 - Web app: https://web-rah22.vercel.app (Vercel project `rah22/web`)
 - Database/Auth: Supabase project `LifeTracker` (ref `urequortpjryilczhnbu`)
 - Migrations applied: `0001_init.sql`, `0002_reference_data.sql`
-- Verified end-to-end: signup creates an auth user, the `handle_new_user` trigger populates `profiles`/`user_settings`/`environment_preferences`/`subscriptions`, RLS blocks unauthenticated reads, and a full signup → onboarding → sign out → sign back in loop returns the same remembered data (tested via a real browser click-through, not just API calls).
-- Auth is autoconfirm (no email-verification step) — see `docs/ARCHITECTURE.md#authentication--authorization` for why.
+- Verified end-to-end (before the login UI was removed): signup created an auth user, the `handle_new_user` trigger populated `profiles`/`user_settings`/`environment_preferences`/`subscriptions`, RLS blocked unauthenticated reads, and a full signup → onboarding → sign out → sign back in loop returned the same remembered data (tested via a real browser click-through, not just API calls).
+- **There is no login or signup page.** This is intentionally a single-user app right now, not open to the public — see `docs/ARCHITECTURE.md#authentication--authorization`. An unauthenticated request to any protected route bounces to `/` (the marketing page). Getting a session (first time, or after one expires) requires a magic link generated via the Supabase Admin API and handed to the owner directly — there's no self-serve way to request one yet.
 - Core nav (`/home`, `/calendar`, `/goals`, `/habits`, `/notes`) all resolve to real pages with working CRUD, verified via a real browser click-through against the live database (create → persist → reload) and cleaned up afterward. See `docs/PRODUCT.md#core-modules-mvp-scope-in-build-order` for exactly what's live vs. still partial per module.
-- Not yet configured: Google Calendar sync (needs a Google Cloud OAuth client), Stripe, Web Push. See `docs/ENVIRONMENT_VARIABLES.md`. Sign-in is email/password only — no social login.
+- Not yet configured: Google Calendar sync (needs a Google Cloud OAuth client), Stripe, Web Push. See `docs/ENVIRONMENT_VARIABLES.md`.
 
 This section below is kept as the reference procedure for redeploying, adding a custom domain, or standing up staging.
 

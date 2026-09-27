@@ -7,7 +7,7 @@ export default async function DayPage({ params }: { params: { date: string } }) 
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) redirect("/login");
+  if (!user) redirect("/");
 
   return <DayClient userId={user.id} date={params.date} />;
 }

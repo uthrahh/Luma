@@ -24,7 +24,7 @@ Progress rolls *up* this chain automatically (weighted aggregation, user-overrid
 
 Status tags: **live** = real, working, deployed. **partial** = live but narrower than the full spec below. **planned** = not built yet.
 
-1. **Auth & Onboarding** — live. Email/password via Supabase Auth; 3-screen onboarding (name → focus areas → environment) ending in first goal creation.
+1. **Auth & Onboarding** — partial, by design. No login/signup UI right now — single-user, private development, not open to the public (see `docs/ARCHITECTURE.md#authentication--authorization`). Sessions are established via a one-off magic link handed to the owner directly; onboarding (3-screen: name → focus areas → environment, ending in first goal creation) is unchanged and still runs after that.
 2. **Home / Today** — live. Greeting, rotating quote, today's progress ring, Next Action, today's tasks/habits, in-progress goals, saga map entry point.
 3. **Saga Map** — live. Horizontal date-node journey; only today is expanded; past/future are smaller nodes; clicking a date opens that day.
 4. **Tasks** — partial. Create/complete from Home, Day, and Goal detail; no dedicated task-list page or natural-language quick add yet.
@@ -36,7 +36,7 @@ Status tags: **live** = real, working, deployed. **partial** = live but narrower
 10. **Notifications** — planned. In-app center + Web Push, quiet hours, per-category preferences.
 11. **Productivity Guide** — planned (content seeded in the database already — `productivity_guides` table — just no UI reads it yet). Short actionable in-app modules, contextual nudges.
 12. **Environments** — live. 5 illustrated, time-of-day-aware scenes (Beach, Space, Rainforest, City, Fields) rendered behind the UI.
-13. **Settings/Profile/Admin/Billing** — planned. Stripe-backed Free/Premium, feature flags, data export/delete.
+13. **Settings/Profile/Admin/Billing** — planned. Stripe-backed Free/Premium, feature flags, data export/delete. A real public login/signup flow and multi-account model comes back as part of this phase, not before — see `docs/DEPLOYMENT.md` for the current auth status.
 
 ## Non-negotiable UX rules
 

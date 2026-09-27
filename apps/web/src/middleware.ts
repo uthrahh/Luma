@@ -1,7 +1,7 @@
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-const PUBLIC_PATHS = ["/", "/login", "/signup", "/auth", "/privacy", "/terms", "/pricing"];
+const PUBLIC_PATHS = ["/", "/auth", "/privacy", "/terms", "/pricing"];
 
 export async function middleware(request: NextRequest) {
   let response = NextResponse.next({ request: { headers: request.headers } });
@@ -33,9 +33,11 @@ export async function middleware(request: NextRequest) {
   const isPublic = PUBLIC_PATHS.some((p) => request.nextUrl.pathname === p || request.nextUrl.pathname.startsWith(`${p}/`));
 
   if (!user && !isPublic) {
-    const redirectUrl = new URL("/login", request.url);
-    redirectUrl.searchParams.set("next", request.nextUrl.pathname);
-    return NextResponse.redirect(redirectUrl);
+    // No login page exists right now (single-user app, not yet open to the
+    // public — see docs/PRODUCT.md). An expired/missing session bounces to
+    // the marketing page rather than a dead /login route; re-authenticating
+    // happens via a one-off magic link, not a form.
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
   return response;

@@ -34,8 +34,8 @@ export default function OnboardingPage() {
     } = await supabase.auth.getUser();
     if (!user) {
       setIsSubmitting(false);
-      setSubmitError("Your session expired — please sign in again.");
-      router.push("/login");
+      setSubmitError("Your session expired.");
+      router.push("/");
       return;
     }
 

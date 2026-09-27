@@ -7,7 +7,7 @@ export default async function HabitsPage() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) redirect("/login");
+  if (!user) redirect("/");
 
   return <HabitsClient userId={user.id} />;
 }

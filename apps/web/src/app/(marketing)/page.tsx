@@ -58,8 +58,8 @@ export default function MarketingHome() {
       <header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
         <span className="font-display text-xl text-ink">Luma</span>
         <nav className="flex items-center gap-4">
-          <Link href="/login" className="focus-ring text-sm text-ink-soft hover:text-ink">
-            Sign in
+          <Link href="/home" className="focus-ring text-sm text-ink-soft hover:text-ink">
+            Open app
           </Link>
         </nav>
       </header>
@@ -74,8 +74,8 @@ export default function MarketingHome() {
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-lg text-ink-soft">Plan less. Do more.</p>
           <div className="mt-8 flex justify-center gap-3">
-            <Link href="/login">
-              <Button size="lg">Sign in</Button>
+            <Link href="/home">
+              <Button size="lg">Open app</Button>
             </Link>
             <Link href="#how-it-works">
               <Button size="lg" variant="secondary">
@@ -185,10 +185,10 @@ export default function MarketingHome() {
       <section className="mx-auto max-w-3xl px-6 py-16 text-center">
         <Reveal>
           <h2 className="font-display text-2xl text-ink">Still early</h2>
-          <p className="mt-2 text-sm text-ink-soft">Luma is in private development right now — not yet open for public sign-ups.</p>
-          <Link href="/login" className="mt-6 inline-block">
+          <p className="mt-2 text-sm text-ink-soft">Luma is in private development right now — not yet open to the public.</p>
+          <Link href="/home" className="mt-6 inline-block">
             <Button size="lg" variant="secondary">
-              Sign in
+              Open app
             </Button>
           </Link>
         </Reveal>

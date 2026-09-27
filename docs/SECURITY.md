@@ -2,7 +2,9 @@
 
 ## Authentication & session handling
 
-Supabase Auth issues the session; `apps/web/src/middleware.ts` refreshes it on every request and redirects unauthenticated users away from any route not in its `PUBLIC_PATHS` allowlist. Server components read the user via `createClient()` (`apps/web/src/lib/supabase/server.ts`), which derives identity from the verified session cookie — no route trusts a client-supplied user id.
+Supabase Auth issues the session; `apps/web/src/middleware.ts` refreshes it on every request and redirects unauthenticated users to `/` (the marketing page) for any route not in its `PUBLIC_PATHS` allowlist. Server components read the user via `createClient()` (`apps/web/src/lib/supabase/server.ts`), which derives identity from the verified session cookie — no route trusts a client-supplied user id.
+
+There is currently no login or signup UI — see `docs/ARCHITECTURE.md#authentication--authorization`. A session is established via a magic link generated ad hoc through the Supabase Admin API (`/auth/v1/admin/generate_link`) and consumed by `apps/web/src/app/auth/magic/page.tsx`; that link is handed to the account owner out of band (chat), never committed to the repo or logged. Public signup should also be disabled at the Supabase project level (`disable_signup` in the auth config) so the REST signup endpoint doesn't accept stray accounts even without a page for it — this wasn't completed yet because the management API token in use had expired; needs a fresh token to finish.
 
 ## Row Level Security
 

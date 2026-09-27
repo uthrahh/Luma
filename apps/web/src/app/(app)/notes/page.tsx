@@ -7,7 +7,7 @@ export default async function NotesPage() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) redirect("/login");
+  if (!user) redirect("/");
 
   return <NotesClient userId={user.id} />;
 }

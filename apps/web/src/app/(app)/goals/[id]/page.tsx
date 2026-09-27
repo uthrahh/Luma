@@ -7,7 +7,7 @@ export default async function GoalDetailPage({ params }: { params: { id: string 
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) redirect("/login");
+  if (!user) redirect("/");
 
   return <GoalDetailClient userId={user.id} goalId={params.id} />;
 }
