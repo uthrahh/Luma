@@ -36,8 +36,12 @@ export async function middleware(request: NextRequest) {
     // No login page exists right now (single-user app, not yet open to the
     // public — see docs/PRODUCT.md). An expired/missing session bounces to
     // the marketing page rather than a dead /login route; re-authenticating
-    // happens via a one-off magic link, not a form.
-    return NextResponse.redirect(new URL("/", request.url));
+    // happens via a one-off magic link, not a form. The ?auth=required flag
+    // lets the marketing page explain the bounce instead of silently
+    // reloading — without it, "Open app" doing nothing visible looks broken.
+    const redirectUrl = new URL("/", request.url);
+    redirectUrl.searchParams.set("auth", "required");
+    return NextResponse.redirect(redirectUrl);
   }
 
   return response;

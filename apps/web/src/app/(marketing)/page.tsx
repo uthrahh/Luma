@@ -52,9 +52,16 @@ const ENV_PREVIEW_TIME = {
   fields: "afternoon",
 } as const;
 
-export default function MarketingHome() {
+export default function MarketingHome({ searchParams }: { searchParams: { auth?: string } }) {
+  const authRequired = searchParams.auth === "required";
+
   return (
     <div className="min-h-screen bg-paper">
+      {authRequired && (
+        <div className="border-b border-accent/30 bg-accent/10 px-6 py-3 text-center text-sm text-ink">
+          You&apos;re signed out. This app isn&apos;t open to the public yet — ask for a new sign-in link.
+        </div>
+      )}
       <header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
         <span className="font-display text-xl text-ink">Luma</span>
         <nav className="flex items-center gap-4">
